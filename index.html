@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>حامد فروتنی | توسعه‌دهنده‌ی فرانت‌اند</title>
+    <meta
+      name="description"
+      content="نمونه‌کار حامد فروتنی؛ طراحی و توسعه‌ی صفحه‌های ریسپانسیو با HTML، CSS و جاوااسکریپت."
+    />
+    <style>
+      @font-face {
+        font-family: "Vazirmatn";
+        src: url("fonts/Vazirmatn-VariableFont_wght.ttf");
+        font-weight: 400 800;
+        font-display: swap;
+      }
+
+      :root {
+        --paper: #f6f7f9;
+        --surface: #ffffff;
+        --ink: #10131a;
+        --muted: #566070;
+        --line: #d9dde5;
+        --blue: #2b3fd6;
+        --blue-ink: #1f2fa8;
+        --tint: #e8ecfb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Vazirmatn", "IRANSansX", Tahoma, "Segoe UI", system-ui,
+          sans-serif;
+        line-height: 1.9;
+        font-size: 17px;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+
+      /* نوار بالا */
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px 16px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .top strong {
+        font-weight: 800;
+      }
+      .top nav {
+        display: flex;
+        gap: 22px;
+      }
+      .top nav a {
+        padding: 10px 4px;
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .top nav a:hover {
+        color: var(--blue);
+      }
+
+      /* معرفی */
+      .hero {
+        padding: 72px 0 56px;
+      }
+      .hero h1 {
+        font-size: clamp(30px, 6vw, 52px);
+        line-height: 1.35;
+        font-weight: 800;
+        margin: 0 0 22px;
+        max-width: 17em;
+        letter-spacing: -0.01em;
+      }
+      .hero p {
+        max-width: 34em;
+        color: var(--muted);
+        margin: 0 0 30px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 22px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        border: 2px solid var(--blue);
+        transition: background 0.2s, color 0.2s;
+      }
+      .btn.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn.primary:hover {
+        background: var(--blue-ink);
+        border-color: var(--blue-ink);
+      }
+      .btn.ghost {
+        color: var(--blue);
+      }
+      .btn.ghost:hover {
+        background: var(--tint);
+      }
+
+      h2 {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 0 0 6px;
+      }
+      .lead {
+        color: var(--muted);
+        margin: 0 0 34px;
+        max-width: 36em;
+      }
+      section {
+        padding: 56px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      /* نمونه‌کارها: ردیف‌های بزرگ، نه کارت */
+      .work {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) clamp(240px, 34vw, 340px);
+        gap: 34px;
+        align-items: center;
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .work:last-child {
+        border-bottom: 0;
+      }
+      .work h3 {
+        font-size: 23px;
+        margin: 0 0 8px;
+        font-weight: 800;
+      }
+      .work p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        max-width: 32em;
+      }
+      .tech {
+        font-size: 14px;
+        color: var(--ink);
+        margin: 0 0 18px;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 13px;
+        background: var(--tint);
+        color: var(--blue-ink);
+        padding: 1px 10px;
+        border-radius: 20px;
+        margin-inline-start: 8px;
+        font-weight: 600;
+        vertical-align: middle;
+      }
+      .thumb {
+        display: block;
+        aspect-ratio: 16/10;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #1f1f1f;
+        border: 1px solid var(--line);
+      }
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.35s;
+      }
+      .thumb:hover img {
+        transform: scale(1.04);
+      }
+      .thumb.movie {
+        display: grid;
+        place-items: center;
+        color: #f5c518;
+        font-size: clamp(20px, 5vw, 26px);
+        font-weight: 800;
+        text-decoration: none;
+        direction: ltr;
+      }
+
+      /* مهارت‌ها */
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 34px;
+      }
+      .skills h3 {
+        font-size: 17px;
+        margin: 0 0 10px;
+        font-weight: 800;
+      }
+      .skills ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .skills li {
+        padding: 7px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .skills li span {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      /* تماس */
+      .contact .actions {
+        margin-top: 6px;
+      }
+      footer {
+        padding: 28px 0 40px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 760px) {
+        .hero {
+          padding: 48px 0 40px;
+        }
+        .work {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 18px;
+          padding: 24px 0;
+        }
+        .thumb {
+          order: -1;
+        }
+        .top nav {
+          gap: 14px;
+        }
+        body {
+          font-size: 16px;
+        }
+        section {
+          padding: 40px 0;
+        }
+        h2 {
+          font-size: 23px;
+        }
+        .lead {
+          margin-bottom: 24px;
+        }
+        .actions .btn {
+          flex: 1 1 140px;
+          text-align: center;
+        }
+        .work .btn {
+          display: block;
+          text-align: center;
+        }
+      }
+      @media (max-width: 380px) {
+        .wrap {
+          padding: 0 16px;
+        }
+        .top nav {
+          gap: 8px;
+        }
+        .btn {
+          padding: 12px 16px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <strong>حامد فروتنی</strong>
+        <nav aria-label="منوی اصلی">
+          <a href="#projects">نمونه‌کارها</a>
+          <a href="#skills">مهارت‌ها</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="hero">
+          <h1>
+            سایت‌های سریع و ریسپانسیو، با ظاهری تمیز روی موبایل و کامپیوتر
+          </h1>
+          <p>
+            من حامد فروتنی‌ام، دانشجوی مهندسی کامپیوتر و توسعه‌دهنده‌ی
+            فرانت‌اند. با HTML، CSS و جاوااسکریپت صفحه‌هایی می‌سازم که ساده،
+            خوانا و سریع باشند. سه نمونه‌ی زیر را می‌توانی همین‌جا باز کنی و
+            امتحان کنی.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#projects">دیدن نمونه‌کارها</a>
+          </div>
+        </div>
+
+        <section id="projects">
+          <h2>نمونه‌کارها</h2>
+          <p class="lead">
+            این‌ها پروژه‌های تمرینی من‌اند. هر کدام یک دمو‌ی زنده دارد که روی
+            موبایل هم باز می‌شود.
+          </p>
+
+          <article class="work">
+            <div>
+              <h3>Movie Explorer <span class="badge">پروژه‌ی تمرینی</span></h3>
+              <p>
+                جست‌وجوی فیلم با داده‌ی زنده از یک API، نمایش جزئیات در پنجره‌ی
+                جداگانه و پیام خطای روشن وقتی شبکه یا سرویس مشکل دارد.
+              </p>
+              <p class="tech">HTML، CSS، JavaScript، Fetch API</p>
+              <a
+                class="btn primary"
+                href="projects/movie-explorer/"
+                target="_blank"
+                rel="noopener"
+                >باز کردن دمو</a
+              >
+            </div>
+            <a
+              class="thumb movie"
+              href="projects/movie-explorer/"
+              target="_blank"
+              rel="noopener"
+              aria-label="باز کردن دموی Movie Explorer"
+              >🎬 Movie Explorer</a
+            >
+          </article>
+
+          <article class="work">
+            <div>
+              <h3>FitZone <span class="badge">پروژه‌ی تمرینی</span></h3>
+              <p>
+                صفحه‌ی فرود برای فروشگاه تجهیزات ورزشی با بخش معرفی، محصولات و
+                فوتر، طراحی‌شده برای نمایش درست در اندازه‌های مختلف صفحه.
+              </p>
+              <p class="tech">HTML، CSS</p>
+              <a
+                class="btn primary"
+                href="projects/fitzone/"
+                target="_blank"
+                rel="noopener"
+                >باز کردن دمو</a
+              >
+            </div>
+            <a
+              class="thumb"
+              href="projects/fitzone/"
+              target="_blank"
+              rel="noopener"
+              aria-label="باز کردن دموی FitZone"
+              ><img
+                src="projects/fitzone/images/HeroImg.jpg"
+                alt="پیش‌نمایش صفحه‌ی FitZone"
+                loading="lazy"
+            /></a>
+          </article>
+
+          <article class="work">
+            <div>
+              <h3>Sportify <span class="badge">پروژه‌ی تمرینی</span></h3>
+              <p>
+                فروشگاه تعاملی با جست‌وجو، فیلتر دسته‌بندی و سبد خرید که
+                انتخاب‌های تو را حتی بعد از بستن صفحه نگه می‌دارد.
+              </p>
+              <p class="tech">HTML، CSS، JavaScript، localStorage</p>
+              <a
+                class="btn primary"
+                href="projects/sports-store/"
+                target="_blank"
+                rel="noopener"
+                >باز کردن دمو</a
+              >
+            </div>
+            <a
+              class="thumb"
+              href="projects/sports-store/"
+              target="_blank"
+              rel="noopener"
+              aria-label="باز کردن دموی Sportify"
+              ><img
+                src="projects/sports-store/images/hero.jpg"
+                alt="پیش‌نمایش فروشگاه Sportify"
+                loading="lazy"
+            /></a>
+          </article>
+        </section>
+
+        <section id="skills">
+          <h2>مهارت‌ها</h2>
+          <p class="lead">فقط چیزهایی که در همین نمونه‌ها می‌توانی ببینی.</p>
+          <div class="skills">
+            <div>
+              <h3>می‌توانم انجام بدهم</h3>
+              <ul>
+                <li>HTML و CSS <span>(چیدمان ریسپانسیو)</span></li>
+                <li>
+                  JavaScript
+                  <span>(DOM، دریافت داده از API، localStorage)</span>
+                </li>
+                <li>Git و GitHub</li>
+              </ul>
+            </div>
+            <div>
+              <h3>در حال یادگیری</h3>
+              <ul>
+                <li>React</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        حامد فروتنی، دانشجوی مهندسی کامپیوتر، دانشگاه علم و صنعت ایران
+      </footer>
+    </div>
+  </body>
+</html>
